@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,10 +43,20 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     "pages.apps.PagesConfig",
     'products.apps.ProductsConfig',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'payments.apps.PaymentsConfig',
    
     'debug_toolbar',
+    'widget_tweaks', 
+    'crispy_forms',
+    'localflavor',
+    
+        
 
+ 
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,6 +138,7 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -147,3 +160,16 @@ import socket  # noqa
 
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+#cart name
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20
+
+#crispy
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Mercado Pago
+env = environ.Env()
+env.read_env(str(BASE_DIR / ".env"))
+MERCADO_PAGO_PUBLIC_KEY = env("MERCADO_PAGO_PUBLIC_KEY")
+MERCADO_PAGO_ACCESS_TOKEN = env("MERCADO_PAGO_ACCESS_TOKEN")

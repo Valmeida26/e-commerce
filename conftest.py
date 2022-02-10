@@ -1,6 +1,5 @@
 import pytest
-
-#from orders.tests.factories import ItemFactory, OrderFactory
+from orders.tests.factories import ItemFactory, OrderFactory
 from products.tests.factories import CategoryFactory, ProductFactory
 
 
@@ -18,16 +17,13 @@ def category():
 def product():
     return ProductFactory()
 
-
 @pytest.fixture
 def order():
     return OrderFactory()
 
-
 @pytest.fixture
 def item():
     return ItemFactory()
-
 
 @pytest.fixture
 def order_form_data():
@@ -42,4 +38,3 @@ def order_form_data():
         "state": "RO",
         "city": "Ji-Paraná",
     }
-    
